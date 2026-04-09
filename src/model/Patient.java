@@ -5,6 +5,8 @@
  */
 package model;
 
+import java.time.LocalDate;
+
 /**
  *
  * @author HP
@@ -16,17 +18,13 @@ public class Patient {
     private String gender;
     private String diagnosis;
     private double consultationFee;
-    private String registrationDate;
-    private boolean hasInsurance;
+    private LocalDate registrationDate;
+    private boolean insured;
 
-    // default constructor
     public Patient() {
     }
 
-    // constructor with args
-    public Patient(String patientID, String fullName, int age, String gender,
-                   String diagnosis, double consultationFee,
-                   String registrationDate, boolean hasInsurance) {
+    public Patient(String patientID, String fullName, int age, String gender, String diagnosis, double consultationFee, LocalDate registrationDate, boolean insured) {
         this.patientID = patientID;
         this.fullName = fullName;
         this.age = age;
@@ -34,31 +32,73 @@ public class Patient {
         this.diagnosis = diagnosis;
         this.consultationFee = consultationFee;
         this.registrationDate = registrationDate;
-        this.hasInsurance = hasInsurance;
+        this.insured = insured;
     }
 
-    // getters and setters
-    public String getPatientID() { return patientID; }
-    public void setPatientID(String patientID) { this.patientID = patientID; }
+    public String getPatientID() {
+        return patientID;
+    }
 
-    public String getFullName() { return fullName; }
-    public void setFullName(String fullName) { this.fullName = fullName; }
+    public void setPatientID(String patientID) {
+        this.patientID = patientID;
+    }
 
-    public int getAge() { return age; }
-    public void setAge(int age) { this.age = age; }
+    public String getFullName() {
+        return fullName;
+    }
 
-    public String getGender() { return gender; }
-    public void setGender(String gender) { this.gender = gender; }
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
 
-    public String getDiagnosis() { return diagnosis; }
-    public void setDiagnosis(String diagnosis) { this.diagnosis = diagnosis; }
+    public int getAge() {
+        return age;
+    }
 
-    public double getConsultationFee() { return consultationFee; }
-    public void setConsultationFee(double consultationFee) { this.consultationFee = consultationFee; }
+    public void setAge(int age) {
+        this.age = age;
+    }
 
-    public String getRegistrationDate() { return registrationDate; }
-    public void setRegistrationDate(String registrationDate) { this.registrationDate = registrationDate; }
+    public String getGender() {
+        return gender;
+    }
 
-    public boolean isHasInsurance() { return hasInsurance; }
-    public void setHasInsurance(boolean hasInsurance) { this.hasInsurance = hasInsurance; }
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getDiagnosis() {
+        return diagnosis;
+    }
+
+    public void setDiagnosis(String diagnosis) {
+        this.diagnosis = diagnosis;
+    }
+
+    public double getConsultationFee() {
+        return consultationFee;
+    }
+
+    public void setConsultationFee(double consultationFee) {
+        this.consultationFee = consultationFee;
+    }
+
+    public LocalDate getRegistrationDate() {
+        return registrationDate;
+    }
+
+    public void setRegistrationDate(LocalDate registrationDate) {
+        this.registrationDate = registrationDate;
+    }
+
+    public boolean isInsured() {
+        return insured;
+    }
+
+    public void setInsured(boolean insured) {
+        this.insured = insured;
+    }
+
+   
 }
+ 

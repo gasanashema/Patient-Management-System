@@ -14,36 +14,59 @@ public class PatientInsurance {
     private String patientID;
     private int companyID;
     private String policyNumber;
-    private boolean isValid;
+    private boolean valid;
 
-    // default constructor
     public PatientInsurance() {
     }
 
-    // constructor with args
-    public PatientInsurance(int patientInsuranceID, String patientID,
-                            int companyID, String policyNumber,
-                            boolean isValid) {
+    public PatientInsurance(int patientInsuranceID, String patientID, int companyID, String policyNumber, boolean valid) {
         this.patientInsuranceID = patientInsuranceID;
         this.patientID = patientID;
         this.companyID = companyID;
         this.policyNumber = policyNumber;
-        this.isValid = isValid;
+        this.valid = valid;
     }
 
-    // getters and setters
-    public int getPatientInsuranceID() { return patientInsuranceID; }
-    public void setPatientInsuranceID(int patientInsuranceID) { this.patientInsuranceID = patientInsuranceID; }
+    public int getPatientInsuranceID() {
+        return patientInsuranceID;
+    }
 
-    public String getPatientID() { return patientID; }
-    public void setPatientID(String patientID) { this.patientID = patientID; }
+    public void setPatientInsuranceID(int patientInsuranceID) {
+        this.patientInsuranceID = patientInsuranceID;
+    }
 
-    public int getCompanyID() { return companyID; }
-    public void setCompanyID(int companyID) { this.companyID = companyID; }
+    public String getPatientID() {
+        return patientID;
+    }
 
-    public String getPolicyNumber() { return policyNumber; }
-    public void setPolicyNumber(String policyNumber) { this.policyNumber = policyNumber; }
+    public void setPatientID(String patientID) {
+        this.patientID = patientID;
+    }
 
-    public boolean isValid() { return isValid; }
-    public void setValid(boolean valid) { this.isValid = valid; }
+    public int getCompanyID() {
+        return companyID;
+    }
+
+    public void setCompanyID(int companyID) {
+        this.companyID = companyID;
+    }
+
+    public String getPolicyNumber() {
+        return policyNumber;
+    }
+
+    public void setPolicyNumber(String policyNumber) {
+        this.policyNumber = policyNumber;
+    }
+
+    public boolean isValid() {
+        return valid;
+    }
+
+    public void setValid(boolean valid) {
+        this.valid = valid;
+    }
+
+   
+
 }

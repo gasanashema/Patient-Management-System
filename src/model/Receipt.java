@@ -5,6 +5,10 @@
  */
 package model;
 
+import java.time.LocalDateTime;
+
+
+
 /**
  *
  * @author HP
@@ -12,7 +16,7 @@ package model;
 public class Receipt {
     private int receiptID;
     private String patientID;
-    private String receiptDate;
+    private LocalDateTime receiptDate;
     private double originalFee;
     private double ageDiscountPercent;
     private double ageDiscountAmount;
@@ -21,16 +25,10 @@ public class Receipt {
     private double finalAmountPaid;
     private String paymentStatus;
 
-    // default constructor
     public Receipt() {
     }
 
-    // constructor with args
-    public Receipt(int receiptID, String patientID, String receiptDate,
-                   double originalFee, double ageDiscountPercent,
-                   double ageDiscountAmount, double insuranceCoveragePercent,
-                   double insuranceCoverageAmount, double finalAmountPaid,
-                   String paymentStatus) {
+    public Receipt(int receiptID, String patientID, LocalDateTime receiptDate, double originalFee, double ageDiscountPercent, double ageDiscountAmount, double insuranceCoveragePercent, double insuranceCoverageAmount, double finalAmountPaid, String paymentStatus) {
         this.receiptID = receiptID;
         this.patientID = patientID;
         this.receiptDate = receiptDate;
@@ -43,34 +41,87 @@ public class Receipt {
         this.paymentStatus = paymentStatus;
     }
 
-    // getters and setters
-    public int getReceiptID() { return receiptID; }
-    public void setReceiptID(int receiptID) { this.receiptID = receiptID; }
+    public int getReceiptID() {
+        return receiptID;
+    }
 
-    public String getPatientID() { return patientID; }
-    public void setPatientID(String patientID) { this.patientID = patientID; }
+    public void setReceiptID(int receiptID) {
+        this.receiptID = receiptID;
+    }
 
-    public String getReceiptDate() { return receiptDate; }
-    public void setReceiptDate(String receiptDate) { this.receiptDate = receiptDate; }
+    public String getPatientID() {
+        return patientID;
+    }
 
-    public double getOriginalFee() { return originalFee; }
-    public void setOriginalFee(double originalFee) { this.originalFee = originalFee; }
+    public void setPatientID(String patientID) {
+        this.patientID = patientID;
+    }
 
-    public double getAgeDiscountPercent() { return ageDiscountPercent; }
-    public void setAgeDiscountPercent(double ageDiscountPercent) { this.ageDiscountPercent = ageDiscountPercent; }
+    public LocalDateTime getReceiptDate() {
+        return receiptDate;
+    }
 
-    public double getAgeDiscountAmount() { return ageDiscountAmount; }
-    public void setAgeDiscountAmount(double ageDiscountAmount) { this.ageDiscountAmount = ageDiscountAmount; }
+    public void setReceiptDate(LocalDateTime receiptDate) {
+        this.receiptDate = receiptDate;
+    }
 
-    public double getInsuranceCoveragePercent() { return insuranceCoveragePercent; }
-    public void setInsuranceCoveragePercent(double insuranceCoveragePercent) { this.insuranceCoveragePercent = insuranceCoveragePercent; }
+    public double getOriginalFee() {
+        return originalFee;
+    }
 
-    public double getInsuranceCoverageAmount() { return insuranceCoverageAmount; }
-    public void setInsuranceCoverageAmount(double insuranceCoverageAmount) { this.insuranceCoverageAmount = insuranceCoverageAmount; }
+    public void setOriginalFee(double originalFee) {
+        this.originalFee = originalFee;
+    }
 
-    public double getFinalAmountPaid() { return finalAmountPaid; }
-    public void setFinalAmountPaid(double finalAmountPaid) { this.finalAmountPaid = finalAmountPaid; }
+    public double getAgeDiscountPercent() {
+        return ageDiscountPercent;
+    }
 
-    public String getPaymentStatus() { return paymentStatus; }
-    public void setPaymentStatus(String paymentStatus) { this.paymentStatus = paymentStatus; }
+    public void setAgeDiscountPercent(double ageDiscountPercent) {
+        this.ageDiscountPercent = ageDiscountPercent;
+    }
+
+    public double getAgeDiscountAmount() {
+        return ageDiscountAmount;
+    }
+
+    public void setAgeDiscountAmount(double ageDiscountAmount) {
+        this.ageDiscountAmount = ageDiscountAmount;
+    }
+
+    public double getInsuranceCoveragePercent() {
+        return insuranceCoveragePercent;
+    }
+
+    public void setInsuranceCoveragePercent(double insuranceCoveragePercent) {
+        this.insuranceCoveragePercent = insuranceCoveragePercent;
+    }
+
+    public double getInsuranceCoverageAmount() {
+        return insuranceCoverageAmount;
+    }
+
+    public void setInsuranceCoverageAmount(double insuranceCoverageAmount) {
+        this.insuranceCoverageAmount = insuranceCoverageAmount;
+    }
+
+    public double getFinalAmountPaid() {
+        return finalAmountPaid;
+    }
+
+    public void setFinalAmountPaid(double finalAmountPaid) {
+        this.finalAmountPaid = finalAmountPaid;
+    }
+
+    public String getPaymentStatus() {
+        return paymentStatus;
+    }
+
+    public void setPaymentStatus(String paymentStatus) {
+        this.paymentStatus = paymentStatus;
+    }
+
+
+
+   
 }

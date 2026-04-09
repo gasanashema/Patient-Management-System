@@ -16,14 +16,10 @@ public class InsuranceCompany {
     private String contactPhone;
     private String contactEmail;
 
-    // default constructor
     public InsuranceCompany() {
     }
 
-    // constructor with args
-    public InsuranceCompany(int companyID, String companyName,
-                            double coveragePercentage,
-                            String contactPhone, String contactEmail) {
+    public InsuranceCompany(int companyID, String companyName, double coveragePercentage, String contactPhone, String contactEmail) {
         this.companyID = companyID;
         this.companyName = companyName;
         this.coveragePercentage = coveragePercentage;
@@ -31,19 +27,45 @@ public class InsuranceCompany {
         this.contactEmail = contactEmail;
     }
 
-    // getters and setters
-    public int getCompanyID() { return companyID; }
-    public void setCompanyID(int companyID) { this.companyID = companyID; }
+    public int getCompanyID() {
+        return companyID;
+    }
 
-    public String getCompanyName() { return companyName; }
-    public void setCompanyName(String companyName) { this.companyName = companyName; }
+    public void setCompanyID(int companyID) {
+        this.companyID = companyID;
+    }
 
-    public double getCoveragePercentage() { return coveragePercentage; }
-    public void setCoveragePercentage(double coveragePercentage) { this.coveragePercentage = coveragePercentage; }
+    public String getCompanyName() {
+        return companyName;
+    }
 
-    public String getContactPhone() { return contactPhone; }
-    public void setContactPhone(String contactPhone) { this.contactPhone = contactPhone; }
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
 
-    public String getContactEmail() { return contactEmail; }
-    public void setContactEmail(String contactEmail) { this.contactEmail = contactEmail; }
+    public double getCoveragePercentage() {
+        return coveragePercentage;
+    }
+
+    public void setCoveragePercentage(double coveragePercentage) {
+        this.coveragePercentage = coveragePercentage;
+    }
+
+    public String getContactPhone() {
+        return contactPhone;
+    }
+
+    public void setContactPhone(String contactPhone) {
+        this.contactPhone = contactPhone;
+    }
+
+    public String getContactEmail() {
+        return contactEmail;
+    }
+
+    public void setContactEmail(String contactEmail) {
+        this.contactEmail = contactEmail;
+    }
+
+ 
 }
