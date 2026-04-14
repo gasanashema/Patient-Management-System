@@ -51,6 +51,20 @@ public class PatientView extends javax.swing.JFrame {
     public PatientView() {
         initComponents();
         loadAllPatients();
+        setupMenuBar();
+    }
+
+    private void setupMenuBar() {
+        JMenuBar menuBar = new JMenuBar();
+        JMenu navMenu = new JMenu("Navigation");
+        JMenuItem backItem = new JMenuItem("Back to Main Menu");
+        backItem.addActionListener(e -> {
+            new App().setVisible(true);
+            this.dispose();
+        });
+        navMenu.add(backItem);
+        menuBar.add(navMenu);
+        setJMenuBar(menuBar);
     }
 
     
@@ -587,13 +601,4 @@ public class PatientView extends javax.swing.JFrame {
         p.add(field, gbc);
     }
 
-
-    public static void main(String[] args) {
-        java.awt.EventQueue.invokeLater(() -> {
-            try {
-                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            } catch (Exception ignored) {}
-            new PatientView().setVisible(true);
-        });
-    }
 }
