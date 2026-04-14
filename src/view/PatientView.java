@@ -39,6 +39,8 @@ public class PatientView extends javax.swing.JFrame {
     private javax.swing.JButton searchBtn;
     private javax.swing.JButton clearBtn;
     private javax.swing.JButton viewAllBtn;
+    private javax.swing.JButton receiptBtn;
+    private javax.swing.JButton reportBtn;
 
     
     private javax.swing.JTable PatientTable;
@@ -130,7 +132,7 @@ public class PatientView extends javax.swing.JFrame {
         gbc.gridwidth = 1;
 
         
-        jPanel1 = new JPanel(new GridLayout(3, 2, 8, 8));
+        jPanel1 = new JPanel(new GridLayout(4, 2, 8, 8));
         jPanel1.setBackground(new Color(25, 25, 50));          
         jPanel1.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
@@ -140,6 +142,8 @@ public class PatientView extends javax.swing.JFrame {
         searchBtn   = makeButton("SEARCH",   new Color(99, 71, 255));  
         viewAllBtn  = makeButton("VIEW ALL", new Color(20, 20, 40));
         clearBtn    = makeButton("CLEAR",    new Color(40, 40, 60));  
+        receiptBtn  = makeButton("RECEIPT",  new Color(46, 204, 113));
+        reportBtn   = makeButton("REPORT",   new Color(241, 196, 15));
 
         jPanel1.add(registerBtn);
         jPanel1.add(updateBtn);
@@ -147,6 +151,8 @@ public class PatientView extends javax.swing.JFrame {
         jPanel1.add(searchBtn);
         jPanel1.add(viewAllBtn);
         jPanel1.add(clearBtn);
+        jPanel1.add(receiptBtn);
+        jPanel1.add(reportBtn);
 
         gbc.gridx = 0; gbc.gridy = 7; gbc.gridwidth = 2;
         gbc.insets = new Insets(16, 10, 10, 10);
@@ -219,6 +225,8 @@ public class PatientView extends javax.swing.JFrame {
         searchBtn  .addActionListener(e -> handleSearch());
         viewAllBtn .addActionListener(e -> loadAllPatients());
         clearBtn   .addActionListener(e -> clearForm());
+        receiptBtn .addActionListener(e -> handleReceipt());
+        reportBtn  .addActionListener(e -> handleReport());
     }
 
     
@@ -437,6 +445,61 @@ public class PatientView extends javax.swing.JFrame {
         consultationTxt.setText("");
         searchTxt.setText("");
         PatientTable.clearSelection();
+    }
+
+    private void handleReceipt() {
+        String id = patientIdtxt.getText().trim();
+        if (id.isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                "Please select a patient from the table first to view their receipt.",
+                "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        String name = fullNameTxt.getText().trim();
+        String fee = consultationTxt.getText().trim();
+        String diagnosis = diagnosisTxt.getText().trim();
+        String date = LocalDate.now().toString();
+
+        String receipt = "======================================\n"
+                       + "          PMIS - PATIENT RECEIPT      \n"
+                       + "======================================\n"
+                       + "Date: " + date + "\n"
+                       + "Patient ID: " + id + "\n"
+                       + "Patient Name: " + name + "\n"
+                       + "Diagnosis: " + diagnosis + "\n"
+                       + "--------------------------------------\n"
+                       + "Consultation Fee: " + fee + " Rwf\n"
+                       + "======================================\n"
+                       + "      Thank you for your visit!       \n"
+                       + "======================================";
+
+        JTextArea textArea = new JTextArea(receipt);
+        textArea.setFont(new Font("Monospaced", Font.PLAIN, 14));
+        textArea.setEditable(false);
+        
+        JOptionPane.showMessageDialog(this, new JScrollPane(textArea), "Patient Receipt", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    private void handleReport() {
+        DefaultTableModel model = (DefaultTableModel) PatientTable.getModel();
+        if (model.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(this, "No data available to generate report.", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        try (java.io.FileWriter writer = new java.io.FileWriter("Patient_Report.csv")) {
+            writer.write("Patient ID,Full Name,Age,Gender,Diagnosis,Fee,Reg. Date\n");
+            for (int i = 0; i < model.getRowCount(); i++) {
+                for (int j = 0; j < model.getColumnCount(); j++) {
+                    // Replace internal commas with spaces to preserve CSV structure
+                    writer.write(model.getValueAt(i, j).toString().replace(",", " ") + (j == model.getColumnCount() - 1 ? "" : ","));
+                }
+                writer.write("\n");
+            }
+            JOptionPane.showMessageDialog(this, "Report exported successfully to Patient_Report.csv!", "Success", JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error generating report: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
   
