@@ -2,7 +2,6 @@ package dao;
 
 import model.InsuranceCompany;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -10,15 +9,11 @@ import java.util.Collections;
 import java.util.List;
 
 public class InsuranceCompanyDao {
-    // JDBC properties
-    private String jdbcUrl = "jdbc:postgresql://localhost:5432/PMIS_db";
-    private String dbUsername = "postgres";
-    private String dbPassword = "postgres";
 
     // CREATE: Add a new insurance company
     public int addCompany(InsuranceCompany ic) {
         try {
-            Connection con = DriverManager.getConnection(jdbcUrl, dbUsername, dbPassword);
+            Connection con = DBConnection.getConnection();
             String sql = "INSERT INTO insurance_company (companyName, coveragePercentage, contactPhone, contactEmail) VALUES (?,?,?,?)";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setString(1, ic.getCompanyName());
@@ -37,7 +32,7 @@ public class InsuranceCompanyDao {
     // READ: Get all insurance companies
     public List<InsuranceCompany> findAllCompanies() {
         try {
-            Connection con = DriverManager.getConnection(jdbcUrl, dbUsername, dbPassword);
+            Connection con = DBConnection.getConnection();
             String sql = "SELECT * FROM insurance_company";
             PreparedStatement pst = con.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
@@ -62,7 +57,7 @@ public class InsuranceCompanyDao {
     // UPDATE: Update an insurance company
     public int updateCompany(InsuranceCompany ic) {
         try {
-            Connection con = DriverManager.getConnection(jdbcUrl, dbUsername, dbPassword);
+            Connection con = DBConnection.getConnection();
             String sql = "UPDATE insurance_company SET companyName=?, coveragePercentage=?, contactPhone=?, contactEmail=? WHERE companyID=?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setString(1, ic.getCompanyName());
@@ -82,7 +77,7 @@ public class InsuranceCompanyDao {
     // SEARCH: Find company by ID
     public InsuranceCompany findCompanyById(int companyID) {
         try {
-            Connection con = DriverManager.getConnection(jdbcUrl, dbUsername, dbPassword);
+            Connection con = DBConnection.getConnection();
             String sql = "SELECT * FROM insurance_company WHERE companyID=?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, companyID);
@@ -94,6 +89,7 @@ public class InsuranceCompanyDao {
                 ic.setCoveragePercentage(rs.getDouble("coveragePercentage"));
                 ic.setContactPhone(rs.getString("contactPhone"));
                 ic.setContactEmail(rs.getString("contactEmail"));
+                con.close();
                 return ic;
             }
             con.close();
@@ -106,7 +102,7 @@ public class InsuranceCompanyDao {
     // DELETE: Remove company
     public int deleteCompany(int companyID) {
         try {
-            Connection con = DriverManager.getConnection(jdbcUrl, dbUsername, dbPassword);
+            Connection con = DBConnection.getConnection();
             String sql = "DELETE FROM insurance_company WHERE companyID=?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, companyID);
