@@ -67,5 +67,9 @@ public class InsuranceCompany {
         this.contactEmail = contactEmail;
     }
 
+    @Override
+    public String toString() {
+        return companyName;
+    }
  
 }
