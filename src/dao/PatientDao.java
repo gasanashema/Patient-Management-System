@@ -200,6 +200,45 @@ public class PatientDao {
         return rows;
     }
 
+    // returns all receipts joined with patient name and insurance company for the invoices table
+    public List<Object[]> getAllReceipts() {
+        String sql = "SELECT r.receiptID, p.fullName, p.age, r.receiptDate, r.originalFee, "
+                   + "r.ageDiscountPercent, r.ageDiscountAmount, "
+                   + "ic.companyName, r.insuranceCoveragePercent, r.insuranceCoverageAmount, "
+                   + "r.finalAmountPaid, r.paymentStatus "
+                   + "FROM receipt r "
+                   + "JOIN patient p ON r.patientID = p.patientID "
+                   + "LEFT JOIN patient_insurance pi ON p.patientID = pi.patientID "
+                   + "LEFT JOIN insurance_company ic ON pi.companyID = ic.companyID "
+                   + "ORDER BY r.receiptDate DESC";
+        List<Object[]> rows = new ArrayList<>();
+        try {
+            Connection con = DBConnection.getConnection();
+            PreparedStatement pst = con.prepareStatement(sql);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                rows.add(new Object[]{
+                    rs.getInt("receiptID"),
+                    rs.getString("fullName"),
+                    rs.getInt("age"),
+                    rs.getTimestamp("receiptDate").toString(),
+                    rs.getDouble("originalFee"),
+                    rs.getDouble("ageDiscountPercent"),
+                    rs.getDouble("ageDiscountAmount"),
+                    rs.getString("companyName") != null ? rs.getString("companyName") : "None",
+                    rs.getDouble("insuranceCoveragePercent"),
+                    rs.getDouble("insuranceCoverageAmount"),
+                    rs.getDouble("finalAmountPaid"),
+                    rs.getString("paymentStatus")
+                });
+            }
+            con.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return rows;
+    }
+
     // returns a single patient with their insurance info for invoice processing
     public Object[] getPatientWithInsurance(String patientID) {
         String sql = "SELECT p.patientID, p.fullName, p.age, p.consultationFee, "

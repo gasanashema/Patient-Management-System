@@ -35,6 +35,25 @@ public class App extends javax.swing.JFrame {
         loadInvoicePatientCombo();
         refreshPatientsTable();
         refreshInsuranceTable();
+        refreshInvoicesTable();
+
+        invoicesTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                int row = invoicesTable.getSelectedRow();
+                if (row == -1) return;
+                invoiceViewNameLabel.setText(invoicesTable.getValueAt(row, 1).toString());
+                invoiceViewAgeLabel.setText(invoicesTable.getValueAt(row, 2).toString());
+                invoiceViewInsuranceCompanyNameLabel.setText(invoicesTable.getValueAt(row, 7).toString());
+                invoiceViewInsuranceDicountLabel.setText(invoicesTable.getValueAt(row, 8).toString() + "%");
+                invoiceViewAgeDicountLabel.setText(invoicesTable.getValueAt(row, 5).toString() + "%");
+                invoiceViewAmountToPay.setText(String.format("%.2f", (double) invoicesTable.getValueAt(row, 4)));
+                invoiceViewAgeDiscount.setText(String.format("%.2f", (double) invoicesTable.getValueAt(row, 6)));
+                invoiceViewInsuranceCoverage.setText(String.format("%.2f", (double) invoicesTable.getValueAt(row, 9)));
+                invoiceViewFinalAmountToPay.setText(String.format("%.2f", (double) invoicesTable.getValueAt(row, 10)));
+                invoiceViewPaymentStatus.setText(invoicesTable.getValueAt(row, 11).toString());
+            }
+        });
 
         companiesTable.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
@@ -78,6 +97,20 @@ public class App extends javax.swing.JFrame {
                 }
             }
         });
+    }
+
+    private void refreshInvoicesTable() {
+        DefaultTableModel model = (DefaultTableModel) invoicesTable.getModel();
+        model.setRowCount(0);
+        model.setColumnIdentifiers(new String[]{
+            "Receipt ID", "Patient Name", "Age", "Date",
+            "Original Fee", "Age Disc %", "Age Disc Amt",
+            "Insurance Co.", "Ins. %", "Ins. Amt",
+            "Final Amount", "Status"
+        });
+        for (Object[] row : patientDao.getAllReceipts()) {
+            model.addRow(row);
+        }
     }
 
     private void loadInvoicePatientCombo() {
@@ -1725,6 +1758,7 @@ public class App extends javax.swing.JFrame {
             currentReceipt = null;
             invoicePatientSelect.setSelectedIndex(0);
             invoiceAmount.setText("");
+            refreshInvoicesTable();
         } else {
             JOptionPane.showMessageDialog(this, "Failed to save invoice.");
         }
