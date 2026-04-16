@@ -3,11 +3,14 @@ package dao;
 
 import model.Patient;
 import model.PatientInsurance;
+import model.Receipt;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -167,7 +170,7 @@ public class PatientDao {
 
     // returns patients joined with their insurance info (LEFT JOIN so uninsured patients still appear)
     public List<Object[]> allPatientsWithInsurance() {
-        String sql = "SELECT p.patientID, p.fullName, p.age, p.gender, p.diagnosis, p.consultationFee, p.registrationDate, "
+        String sql = "SELECT p.patientID, p.fullName, p.age, p.gender, p.diagnosis, p.registrationDate, "
                    + "ic.companyName, pi.policyNumber, pi.valid "
                    + "FROM patient p "
                    + "LEFT JOIN patient_insurance pi ON p.patientID = pi.patientID "
@@ -178,16 +181,12 @@ public class PatientDao {
             PreparedStatement pst = con.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
-                int age = rs.getInt("age");
-                double fee = rs.getDouble("consultationFee");
-                double originalFee = reverseDiscount(age, fee);
                 rows.add(new Object[]{
                     rs.getString("patientID"),
                     rs.getString("fullName"),
-                    age,
+                    rs.getInt("age"),
                     rs.getString("gender"),
                     rs.getString("diagnosis"),
-                    String.format("%.2f", originalFee) + " → " + String.format("%.2f", fee),
                     rs.getDate("registrationDate") != null ? rs.getDate("registrationDate").toLocalDate().toString() : "",
                     rs.getString("companyName") != null ? rs.getString("companyName") : "None",
                     rs.getString("policyNumber") != null ? rs.getString("policyNumber") : "-",
@@ -201,10 +200,61 @@ public class PatientDao {
         return rows;
     }
 
-    // reverse the discount to recover the original fee for display
-    private double reverseDiscount(int age, double discountedFee) {
-        if (age < 12)  return discountedFee / 0.50;
-        if (age > 60)  return discountedFee / 0.70;
-        return discountedFee;
+    // returns a single patient with their insurance info for invoice processing
+    public Object[] getPatientWithInsurance(String patientID) {
+        String sql = "SELECT p.patientID, p.fullName, p.age, p.consultationFee, "
+                   + "ic.companyName, ic.coveragePercentage "
+                   + "FROM patient p "
+                   + "LEFT JOIN patient_insurance pi ON p.patientID = pi.patientID "
+                   + "LEFT JOIN insurance_company ic ON pi.companyID = ic.companyID "
+                   + "WHERE p.patientID = ?";
+        try {
+            Connection con = DBConnection.getConnection();
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setString(1, patientID);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                Object[] row = new Object[]{
+                    rs.getString("patientID"),
+                    rs.getString("fullName"),
+                    rs.getInt("age"),
+                    rs.getDouble("consultationFee"),
+                    rs.getString("companyName") != null ? rs.getString("companyName") : "None",
+                    rs.getObject("coveragePercentage") != null ? rs.getDouble("coveragePercentage") : 0.0
+                };
+                con.close();
+                return row;
+            }
+            con.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    // saves a receipt into the receipt table
+    public int saveReceipt(Receipt r) {
+        String sql = "INSERT INTO receipt (patientID, receiptDate, originalFee, ageDiscountPercent, ageDiscountAmount, "
+                   + "insuranceCoveragePercent, insuranceCoverageAmount, finalAmountPaid, paymentStatus) "
+                   + "VALUES (?,?,?,?,?,?,?,?,?)";
+        try {
+            Connection con = DBConnection.getConnection();
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setString(1, r.getPatientID());
+            pst.setTimestamp(2, Timestamp.valueOf(r.getReceiptDate()));
+            pst.setDouble(3, r.getOriginalFee());
+            pst.setDouble(4, r.getAgeDiscountPercent());
+            pst.setDouble(5, r.getAgeDiscountAmount());
+            pst.setDouble(6, r.getInsuranceCoveragePercent());
+            pst.setDouble(7, r.getInsuranceCoverageAmount());
+            pst.setDouble(8, r.getFinalAmountPaid());
+            pst.setString(9, r.getPaymentStatus());
+            int rows = pst.executeUpdate();
+            con.close();
+            return rows;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return 0;
     }
 }

@@ -11,7 +11,6 @@ public class Patient {
     private String gender;
     private String diagnosis;
     private double consultationFee;
-    private double originalFee;
     private LocalDate registrationDate;
 
     public Patient() {
@@ -24,7 +23,6 @@ public class Patient {
         this.gender = gender;
         this.diagnosis = diagnosis;
         this.consultationFee = consultationFee;
-        this.originalFee = consultationFee;
         this.registrationDate = registrationDate;
     }
 
@@ -74,14 +72,6 @@ public class Patient {
 
     public void setConsultationFee(double consultationFee) {
         this.consultationFee = consultationFee;
-    }
-
-    public double getOriginalFee() {
-        return originalFee;
-    }
-
-    public void setOriginalFee(double originalFee) {
-        this.originalFee = originalFee;
     }
 
     public LocalDate getRegistrationDate() {
