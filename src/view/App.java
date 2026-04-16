@@ -45,7 +45,9 @@ public class App extends javax.swing.JFrame {
                 ageTxt.setText(patientsTable.getValueAt(row, 2).toString());
                 genderTxt.setSelectedItem(patientsTable.getValueAt(row, 3).toString());
                 ageTxt1.setText(patientsTable.getValueAt(row, 4).toString());
-                consultationFeeTxt.setText(patientsTable.getValueAt(row, 5).toString());
+                // fee column is "original → discounted", extract the original for editing
+                String feeCell = patientsTable.getValueAt(row, 5).toString();
+                consultationFeeTxt.setText(feeCell.contains("\u2192") ? feeCell.split("\u2192")[0].trim() : feeCell);
                 // fill insurance fields
                 String companyName = patientsTable.getValueAt(row, 7).toString();
                 policyNumber.setText(patientsTable.getValueAt(row, 8).toString());
@@ -75,7 +77,7 @@ public class App extends javax.swing.JFrame {
         model.setRowCount(0);
         model.setColumnIdentifiers(new String[]{
             "Patient ID", "Full Name", "Age", "Gender", "Diagnosis",
-            "Consultation Fee", "Registration Date", "Insurance Company", "Policy Number", "Valid"
+            "Fee (Original → After Discount)", "Registration Date", "Insurance Company", "Policy Number", "Valid"
         });
         for (Object[] row : patientDao.allPatientsWithInsurance()) {
             model.addRow(row);
@@ -161,6 +163,108 @@ public class App extends javax.swing.JFrame {
         updateCompanyBtn = new javax.swing.JButton();
         deleteCompanyBtn = new javax.swing.JButton();
         saveCompanyBtn2 = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
+        invoicePatientSelect = new javax.swing.JComboBox<>();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        invoiceAmount = new javax.swing.JTextField();
+        previewInvoice = new javax.swing.JButton();
+        saveInvoice = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        invoicePreviewNameLabel = new javax.swing.JLabel();
+        invoicePreviewAgeLabel = new javax.swing.JLabel();
+        invoicePreviewInsuranceCompanyNameLabel = new javax.swing.JLabel();
+        invoicePreviewInsuranceDicountLabel = new javax.swing.JLabel();
+        invoicePreviewAgeDicountLabel = new javax.swing.JLabel();
+        jPanel7 = new javax.swing.JPanel();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
+        invoicePreviewAmountToPay = new javax.swing.JLabel();
+        invoicePreviewAgeDiscount = new javax.swing.JLabel();
+        invoicePreviewInsuranceCoverage = new javax.swing.JLabel();
+        invoicePreviewFinalAmountToPay = new javax.swing.JLabel();
+        invoicePreviewPaymentStatus = new javax.swing.JLabel();
+        jPanel13 = new javax.swing.JPanel();
+        jPanel14 = new javax.swing.JPanel();
+        jLabel48 = new javax.swing.JLabel();
+        jPanel23 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        invoicesTable = new javax.swing.JTable();
+        jPanel15 = new javax.swing.JPanel();
+        jLabel51 = new javax.swing.JLabel();
+        jLabel52 = new javax.swing.JLabel();
+        jLabel53 = new javax.swing.JLabel();
+        jPanel16 = new javax.swing.JPanel();
+        jLabel54 = new javax.swing.JLabel();
+        jLabel55 = new javax.swing.JLabel();
+        jLabel56 = new javax.swing.JLabel();
+        jLabel57 = new javax.swing.JLabel();
+        jLabel58 = new javax.swing.JLabel();
+        invoicePreviewNameLabel2 = new javax.swing.JLabel();
+        invoicePreviewAgeLabel2 = new javax.swing.JLabel();
+        invoicePreviewInsuranceCompanyNameLabel2 = new javax.swing.JLabel();
+        invoicePreviewInsuranceDicountLabel2 = new javax.swing.JLabel();
+        invoicePreviewAgeDicountLabel2 = new javax.swing.JLabel();
+        jPanel17 = new javax.swing.JPanel();
+        jLabel59 = new javax.swing.JLabel();
+        jLabel60 = new javax.swing.JLabel();
+        jLabel61 = new javax.swing.JLabel();
+        jLabel62 = new javax.swing.JLabel();
+        jLabel63 = new javax.swing.JLabel();
+        invoicePreviewAmountToPay2 = new javax.swing.JLabel();
+        invoicePreviewAgeDiscount2 = new javax.swing.JLabel();
+        invoicePreviewInsuranceCoverage2 = new javax.swing.JLabel();
+        invoicePreviewFinalAmountToPay2 = new javax.swing.JLabel();
+        invoicePreviewPaymentStatus2 = new javax.swing.JLabel();
+        jPanel18 = new javax.swing.JPanel();
+        jPanel19 = new javax.swing.JPanel();
+        jLabel64 = new javax.swing.JLabel();
+        invoicePatientSelect3 = new javax.swing.JComboBox<>();
+        jLabel65 = new javax.swing.JLabel();
+        jLabel66 = new javax.swing.JLabel();
+        invoiceAmount3 = new javax.swing.JTextField();
+        previewInvoice3 = new javax.swing.JButton();
+        saveInvoice3 = new javax.swing.JButton();
+        jPanel20 = new javax.swing.JPanel();
+        jLabel67 = new javax.swing.JLabel();
+        jLabel68 = new javax.swing.JLabel();
+        jLabel69 = new javax.swing.JLabel();
+        jPanel21 = new javax.swing.JPanel();
+        jLabel70 = new javax.swing.JLabel();
+        jLabel71 = new javax.swing.JLabel();
+        jLabel72 = new javax.swing.JLabel();
+        jLabel73 = new javax.swing.JLabel();
+        jLabel74 = new javax.swing.JLabel();
+        invoiceViewNameLabel = new javax.swing.JLabel();
+        invoiceViewAgeLabel = new javax.swing.JLabel();
+        invoiceViewInsuranceCompanyNameLabel = new javax.swing.JLabel();
+        invoiceViewInsuranceDicountLabel = new javax.swing.JLabel();
+        invoiceViewAgeDicountLabel = new javax.swing.JLabel();
+        jPanel22 = new javax.swing.JPanel();
+        jLabel75 = new javax.swing.JLabel();
+        jLabel76 = new javax.swing.JLabel();
+        jLabel77 = new javax.swing.JLabel();
+        jLabel78 = new javax.swing.JLabel();
+        jLabel79 = new javax.swing.JLabel();
+        invoiceViewAmountToPay = new javax.swing.JLabel();
+        invoiceViewAgeDiscount = new javax.swing.JLabel();
+        invoiceViewInsuranceCoverage = new javax.swing.JLabel();
+        invoiceViewFinalAmountToPay = new javax.swing.JLabel();
+        invoiceViewPaymentStatus = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -372,7 +476,7 @@ public class App extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel14)
                         .addGap(301, 301, 301)))
-                .addContainerGap(75, Short.MAX_VALUE))
+                .addContainerGap(137, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -487,6 +591,11 @@ public class App extends javax.swing.JFrame {
         updateCompanyBtn.setFont(new java.awt.Font("Ubuntu Sans", 1, 14)); // NOI18N
         updateCompanyBtn.setForeground(new java.awt.Color(33, 37, 41));
         updateCompanyBtn.setText("UPDATE COMPANY");
+        updateCompanyBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateCompanyBtnActionPerformed(evt);
+            }
+        });
 
         deleteCompanyBtn.setBackground(new java.awt.Color(255, 193, 7));
         deleteCompanyBtn.setFont(new java.awt.Font("Ubuntu Sans", 1, 14)); // NOI18N
@@ -502,6 +611,11 @@ public class App extends javax.swing.JFrame {
         saveCompanyBtn2.setFont(new java.awt.Font("Ubuntu Sans", 1, 14)); // NOI18N
         saveCompanyBtn2.setForeground(new java.awt.Color(33, 37, 41));
         saveCompanyBtn2.setText("SAVE COMPANY");
+        saveCompanyBtn2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveCompanyBtn2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -560,12 +674,1048 @@ public class App extends javax.swing.JFrame {
                     .addComponent(updateCompanyBtn)
                     .addComponent(deleteCompanyBtn)
                     .addComponent(saveCompanyBtn2))
-                .addContainerGap(400, Short.MAX_VALUE))
+                .addContainerGap(537, Short.MAX_VALUE))
         );
 
         jSplitPane2.setRightComponent(jPanel2);
 
         tabsPane.addTab("INSURANCE COMPANIES", jSplitPane2);
+
+        jPanel4.setBackground(new java.awt.Color(33, 37, 41));
+
+        jLabel16.setFont(new java.awt.Font("Ubuntu Sans", 1, 24)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 193, 7));
+        jLabel16.setText("INVOICE PROCESSING");
+
+        invoicePatientSelect.setBackground(new java.awt.Color(255, 255, 255));
+        invoicePatientSelect.setToolTipText("");
+        invoicePatientSelect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                invoicePatientSelectActionPerformed(evt);
+            }
+        });
+
+        jLabel17.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel17.setFont(new java.awt.Font("Ubuntu Sans", 1, 18)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(255, 193, 7));
+        jLabel17.setText("SELECT PATIENT");
+
+        jLabel18.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel18.setFont(new java.awt.Font("Ubuntu Sans", 1, 18)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(255, 193, 7));
+        jLabel18.setText("AMOUNT");
+
+        invoiceAmount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                invoiceAmountActionPerformed(evt);
+            }
+        });
+
+        previewInvoice.setBackground(new java.awt.Color(255, 193, 7));
+        previewInvoice.setFont(new java.awt.Font("Ubuntu Sans", 1, 14)); // NOI18N
+        previewInvoice.setForeground(new java.awt.Color(33, 37, 41));
+        previewInvoice.setText("PREVIEW INVOICE");
+        previewInvoice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                previewInvoiceActionPerformed(evt);
+            }
+        });
+
+        saveInvoice.setBackground(new java.awt.Color(255, 193, 7));
+        saveInvoice.setFont(new java.awt.Font("Ubuntu Sans", 1, 14)); // NOI18N
+        saveInvoice.setForeground(new java.awt.Color(33, 37, 41));
+        saveInvoice.setText("SAVE INVOICE");
+        saveInvoice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveInvoiceActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(107, 107, 107)
+                .addComponent(jLabel16)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(87, 87, 87)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(previewInvoice)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(saveInvoice)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(invoiceAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel17)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(invoicePatientSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(75, 75, 75))))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(invoicePatientSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel17))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel18)
+                    .addComponent(invoiceAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(previewInvoice)
+                    .addComponent(saveInvoice))
+                .addContainerGap(376, Short.MAX_VALUE))
+        );
+
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel19.setFont(new java.awt.Font("Ubuntu Sans", 1, 24)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(33, 37, 41));
+        jLabel19.setText("INVOICE PREVIEW");
+
+        jLabel20.setFont(new java.awt.Font("Ubuntu Sans", 1, 14)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(33, 37, 41));
+        jLabel20.setText("PATIENT INFORAMATION");
+
+        jLabel21.setFont(new java.awt.Font("Ubuntu Sans", 1, 14)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(33, 37, 41));
+        jLabel21.setText("TRANSACTION INFORMATION");
+
+        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel22.setFont(new java.awt.Font("Ubuntu Sans", 1, 14)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(33, 37, 41));
+        jLabel22.setText("NAMES");
+
+        jLabel23.setFont(new java.awt.Font("Ubuntu Sans", 1, 14)); // NOI18N
+        jLabel23.setForeground(new java.awt.Color(33, 37, 41));
+        jLabel23.setText("AGE");
+
+        jLabel24.setFont(new java.awt.Font("Ubuntu Sans", 1, 14)); // NOI18N
+        jLabel24.setForeground(new java.awt.Color(33, 37, 41));
+        jLabel24.setText("INSURANCE COMPANY");
+
+        jLabel25.setFont(new java.awt.Font("Ubuntu Sans", 1, 14)); // NOI18N
+        jLabel25.setForeground(new java.awt.Color(33, 37, 41));
+        jLabel25.setText("INSURANCE COVERAGE");
+
+        jLabel26.setFont(new java.awt.Font("Ubuntu Sans", 1, 14)); // NOI18N
+        jLabel26.setForeground(new java.awt.Color(33, 37, 41));
+        jLabel26.setText("AGE DISCOUNT");
+
+        invoicePreviewNameLabel.setText(" ");
+        invoicePreviewNameLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        invoicePreviewAgeLabel.setText(" ");
+        invoicePreviewAgeLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        invoicePreviewInsuranceCompanyNameLabel.setText(" ");
+        invoicePreviewInsuranceCompanyNameLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        invoicePreviewInsuranceDicountLabel.setText(" ");
+        invoicePreviewInsuranceDicountLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        invoicePreviewAgeDicountLabel.setText(" ");
+        invoicePreviewAgeDicountLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(jLabel24)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(invoicePreviewInsuranceCompanyNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel22)
+                            .addComponent(jLabel23))
+                        .addGap(121, 121, 121)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(invoicePreviewNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(invoicePreviewAgeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel25)
+                            .addComponent(jLabel26))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(invoicePreviewAgeDicountLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(invoicePreviewInsuranceDicountLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel22)
+                    .addComponent(invoicePreviewNameLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel23)
+                    .addComponent(invoicePreviewAgeLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel24)
+                    .addComponent(invoicePreviewInsuranceCompanyNameLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel25)
+                    .addComponent(invoicePreviewInsuranceDicountLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel26)
+                    .addComponent(invoicePreviewAgeDicountLabel))
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
+
+        jPanel7.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel27.setFont(new java.awt.Font("Ubuntu Sans", 1, 14)); // NOI18N
+        jLabel27.setForeground(new java.awt.Color(33, 37, 41));
+        jLabel27.setText("AMOUNT TO PAY");
+
+        jLabel28.setFont(new java.awt.Font("Ubuntu Sans", 1, 14)); // NOI18N
+        jLabel28.setForeground(new java.awt.Color(33, 37, 41));
+        jLabel28.setText("AGE DISCOUNT AMOUNT");
+
+        jLabel29.setFont(new java.awt.Font("Ubuntu Sans", 1, 14)); // NOI18N
+        jLabel29.setForeground(new java.awt.Color(33, 37, 41));
+        jLabel29.setText("INSURANCE COVERAGE");
+
+        jLabel30.setFont(new java.awt.Font("Ubuntu Sans", 1, 14)); // NOI18N
+        jLabel30.setForeground(new java.awt.Color(33, 37, 41));
+        jLabel30.setText("FINAL AMOUNT TO PAY");
+
+        jLabel31.setFont(new java.awt.Font("Ubuntu Sans", 1, 14)); // NOI18N
+        jLabel31.setForeground(new java.awt.Color(33, 37, 41));
+        jLabel31.setText("PAYMENT STATUS");
+
+        invoicePreviewAmountToPay.setText(" ");
+        invoicePreviewAmountToPay.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        invoicePreviewAgeDiscount.setText(" ");
+        invoicePreviewAgeDiscount.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        invoicePreviewInsuranceCoverage.setText(" ");
+        invoicePreviewInsuranceCoverage.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        invoicePreviewFinalAmountToPay.setText(" ");
+        invoicePreviewFinalAmountToPay.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        invoicePreviewPaymentStatus.setText(" ");
+        invoicePreviewPaymentStatus.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addComponent(jLabel28)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(invoicePreviewAgeDiscount, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addComponent(jLabel29)
+                                .addGap(18, 18, 18)
+                                .addComponent(invoicePreviewInsuranceCoverage, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel7Layout.createSequentialGroup()
+                                    .addComponent(jLabel31)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(invoicePreviewPaymentStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel7Layout.createSequentialGroup()
+                                    .addComponent(jLabel30)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(invoicePreviewFinalAmountToPay, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addContainerGap(22, Short.MAX_VALUE))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(jLabel27)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(invoicePreviewAmountToPay, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(21, 21, 21))))
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel27)
+                    .addComponent(invoicePreviewAmountToPay))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel28)
+                    .addComponent(invoicePreviewAgeDiscount))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel29)
+                    .addComponent(invoicePreviewInsuranceCoverage))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel30)
+                    .addComponent(invoicePreviewFinalAmountToPay))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel31)
+                    .addComponent(invoicePreviewPaymentStatus))
+                .addContainerGap(15, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap(148, Short.MAX_VALUE)
+                .addComponent(jLabel19)
+                .addGap(108, 108, 108))
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(48, 48, 48)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel21)
+                    .addComponent(jLabel20)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(139, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 225, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 272, Short.MAX_VALUE))
+        );
+
+        tabsPane.addTab("INVOICE PROCESSING", jPanel3);
+
+        jPanel14.setBackground(new java.awt.Color(33, 37, 41));
+
+        jLabel48.setFont(new java.awt.Font("Ubuntu Sans", 1, 24)); // NOI18N
+        jLabel48.setForeground(new java.awt.Color(255, 193, 7));
+        jLabel48.setText("AVAILABLE INVOICES LIST");
+
+        invoicesTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(invoicesTable);
+
+        javax.swing.GroupLayout jPanel23Layout = new javax.swing.GroupLayout(jPanel23);
+        jPanel23.setLayout(jPanel23Layout);
+        jPanel23Layout.setHorizontalGroup(
+            jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel23Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 524, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel23Layout.setVerticalGroup(
+            jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel23Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 446, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(56, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
+        jPanel14.setLayout(jPanel14Layout);
+        jPanel14Layout.setHorizontalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel14Layout.createSequentialGroup()
+                .addGap(110, 110, 110)
+                .addComponent(jLabel48)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel14Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel14Layout.setVerticalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel14Layout.createSequentialGroup()
+                .addComponent(jLabel48, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        jPanel15.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel51.setFont(new java.awt.Font("Ubuntu Sans", 1, 24)); // NOI18N
+        jLabel51.setForeground(new java.awt.Color(33, 37, 41));
+        jLabel51.setText("INVOICE PREVIEW");
+
+        jLabel52.setFont(new java.awt.Font("Ubuntu Sans", 1, 14)); // NOI18N
+        jLabel52.setForeground(new java.awt.Color(33, 37, 41));
+        jLabel52.setText("PATIENT INFORAMATION");
+
+        jLabel53.setFont(new java.awt.Font("Ubuntu Sans", 1, 14)); // NOI18N
+        jLabel53.setForeground(new java.awt.Color(33, 37, 41));
+        jLabel53.setText("TRANSACTION INFORMATION");
+
+        jPanel16.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel16.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel54.setFont(new java.awt.Font("Ubuntu Sans", 1, 14)); // NOI18N
+        jLabel54.setForeground(new java.awt.Color(33, 37, 41));
+        jLabel54.setText("NAMES");
+
+        jLabel55.setFont(new java.awt.Font("Ubuntu Sans", 1, 14)); // NOI18N
+        jLabel55.setForeground(new java.awt.Color(33, 37, 41));
+        jLabel55.setText("AGE");
+
+        jLabel56.setFont(new java.awt.Font("Ubuntu Sans", 1, 14)); // NOI18N
+        jLabel56.setForeground(new java.awt.Color(33, 37, 41));
+        jLabel56.setText("INSURANCE COMPANY");
+
+        jLabel57.setFont(new java.awt.Font("Ubuntu Sans", 1, 14)); // NOI18N
+        jLabel57.setForeground(new java.awt.Color(33, 37, 41));
+        jLabel57.setText("INSURANCE COVERAGE");
+
+        jLabel58.setFont(new java.awt.Font("Ubuntu Sans", 1, 14)); // NOI18N
+        jLabel58.setForeground(new java.awt.Color(33, 37, 41));
+        jLabel58.setText("AGE DISCOUNT");
+
+        invoicePreviewNameLabel2.setText(" ");
+        invoicePreviewNameLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        invoicePreviewAgeLabel2.setText(" ");
+        invoicePreviewAgeLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        invoicePreviewInsuranceCompanyNameLabel2.setText(" ");
+        invoicePreviewInsuranceCompanyNameLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        invoicePreviewInsuranceDicountLabel2.setText(" ");
+        invoicePreviewInsuranceDicountLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        invoicePreviewAgeDicountLabel2.setText(" ");
+        invoicePreviewAgeDicountLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
+        jPanel16.setLayout(jPanel16Layout);
+        jPanel16Layout.setHorizontalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel16Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel16Layout.createSequentialGroup()
+                        .addComponent(jLabel56)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(invoicePreviewInsuranceCompanyNameLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel16Layout.createSequentialGroup()
+                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel54)
+                            .addComponent(jLabel55))
+                        .addGap(121, 121, 121)
+                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(invoicePreviewNameLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(invoicePreviewAgeLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel16Layout.createSequentialGroup()
+                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel57)
+                            .addComponent(jLabel58))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(invoicePreviewAgeDicountLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(invoicePreviewInsuranceDicountLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel16Layout.setVerticalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel16Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel54)
+                    .addComponent(invoicePreviewNameLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel55)
+                    .addComponent(invoicePreviewAgeLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel56)
+                    .addComponent(invoicePreviewInsuranceCompanyNameLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel57)
+                    .addComponent(invoicePreviewInsuranceDicountLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel58)
+                    .addComponent(invoicePreviewAgeDicountLabel2))
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
+
+        jPanel17.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel17.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel59.setFont(new java.awt.Font("Ubuntu Sans", 1, 14)); // NOI18N
+        jLabel59.setForeground(new java.awt.Color(33, 37, 41));
+        jLabel59.setText("AMOUNT TO PAY");
+
+        jLabel60.setFont(new java.awt.Font("Ubuntu Sans", 1, 14)); // NOI18N
+        jLabel60.setForeground(new java.awt.Color(33, 37, 41));
+        jLabel60.setText("AGE DISCOUNT AMOUNT");
+
+        jLabel61.setFont(new java.awt.Font("Ubuntu Sans", 1, 14)); // NOI18N
+        jLabel61.setForeground(new java.awt.Color(33, 37, 41));
+        jLabel61.setText("INSURANCE COVERAGE");
+
+        jLabel62.setFont(new java.awt.Font("Ubuntu Sans", 1, 14)); // NOI18N
+        jLabel62.setForeground(new java.awt.Color(33, 37, 41));
+        jLabel62.setText("FINAL AMOUNT TO PAY");
+
+        jLabel63.setFont(new java.awt.Font("Ubuntu Sans", 1, 14)); // NOI18N
+        jLabel63.setForeground(new java.awt.Color(33, 37, 41));
+        jLabel63.setText("PAYMENT STATUS");
+
+        invoicePreviewAmountToPay2.setText(" ");
+        invoicePreviewAmountToPay2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        invoicePreviewAgeDiscount2.setText(" ");
+        invoicePreviewAgeDiscount2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        invoicePreviewInsuranceCoverage2.setText(" ");
+        invoicePreviewInsuranceCoverage2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        invoicePreviewFinalAmountToPay2.setText(" ");
+        invoicePreviewFinalAmountToPay2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        invoicePreviewPaymentStatus2.setText(" ");
+        invoicePreviewPaymentStatus2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
+        jPanel17.setLayout(jPanel17Layout);
+        jPanel17Layout.setHorizontalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel17Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel17Layout.createSequentialGroup()
+                        .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel17Layout.createSequentialGroup()
+                                .addComponent(jLabel60)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(invoicePreviewAgeDiscount2, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel17Layout.createSequentialGroup()
+                                .addComponent(jLabel61)
+                                .addGap(18, 18, 18)
+                                .addComponent(invoicePreviewInsuranceCoverage2, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel17Layout.createSequentialGroup()
+                                    .addComponent(jLabel63)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(invoicePreviewPaymentStatus2, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel17Layout.createSequentialGroup()
+                                    .addComponent(jLabel62)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(invoicePreviewFinalAmountToPay2, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addContainerGap(22, Short.MAX_VALUE))
+                    .addGroup(jPanel17Layout.createSequentialGroup()
+                        .addComponent(jLabel59)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(invoicePreviewAmountToPay2, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(21, 21, 21))))
+        );
+        jPanel17Layout.setVerticalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel17Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel59)
+                    .addComponent(invoicePreviewAmountToPay2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel60)
+                    .addComponent(invoicePreviewAgeDiscount2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel61)
+                    .addComponent(invoicePreviewInsuranceCoverage2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel62)
+                    .addComponent(invoicePreviewFinalAmountToPay2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel63)
+                    .addComponent(invoicePreviewPaymentStatus2))
+                .addContainerGap(15, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
+        jPanel15.setLayout(jPanel15Layout);
+        jPanel15Layout.setHorizontalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
+                .addContainerGap(148, Short.MAX_VALUE)
+                .addComponent(jLabel51)
+                .addGap(108, 108, 108))
+            .addGroup(jPanel15Layout.createSequentialGroup()
+                .addGap(48, 48, 48)
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel53)
+                    .addComponent(jLabel52)
+                    .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel15Layout.setVerticalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel15Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jLabel51, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel52, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel53, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(139, Short.MAX_VALUE))
+        );
+
+        jPanel19.setBackground(new java.awt.Color(33, 37, 41));
+
+        jLabel64.setFont(new java.awt.Font("Ubuntu Sans", 1, 24)); // NOI18N
+        jLabel64.setForeground(new java.awt.Color(255, 193, 7));
+        jLabel64.setText("INVOICE PROCESSING");
+
+        invoicePatientSelect3.setBackground(new java.awt.Color(255, 255, 255));
+        invoicePatientSelect3.setToolTipText("");
+        invoicePatientSelect3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                invoicePatientSelect3ActionPerformed(evt);
+            }
+        });
+
+        jLabel65.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel65.setFont(new java.awt.Font("Ubuntu Sans", 1, 18)); // NOI18N
+        jLabel65.setForeground(new java.awt.Color(255, 193, 7));
+        jLabel65.setText("SELECT PATIENT");
+
+        jLabel66.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel66.setFont(new java.awt.Font("Ubuntu Sans", 1, 18)); // NOI18N
+        jLabel66.setForeground(new java.awt.Color(255, 193, 7));
+        jLabel66.setText("AMOUNT");
+
+        invoiceAmount3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                invoiceAmount3ActionPerformed(evt);
+            }
+        });
+
+        previewInvoice3.setBackground(new java.awt.Color(255, 193, 7));
+        previewInvoice3.setFont(new java.awt.Font("Ubuntu Sans", 1, 14)); // NOI18N
+        previewInvoice3.setForeground(new java.awt.Color(33, 37, 41));
+        previewInvoice3.setText("PREVIEW INVOICE");
+        previewInvoice3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                previewInvoice3ActionPerformed(evt);
+            }
+        });
+
+        saveInvoice3.setBackground(new java.awt.Color(255, 193, 7));
+        saveInvoice3.setFont(new java.awt.Font("Ubuntu Sans", 1, 14)); // NOI18N
+        saveInvoice3.setForeground(new java.awt.Color(33, 37, 41));
+        saveInvoice3.setText("SAVE INVOICE");
+        saveInvoice3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveInvoice3ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
+        jPanel19.setLayout(jPanel19Layout);
+        jPanel19Layout.setHorizontalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel19Layout.createSequentialGroup()
+                .addGap(107, 107, 107)
+                .addComponent(jLabel64)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel19Layout.createSequentialGroup()
+                .addGap(87, 87, 87)
+                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel19Layout.createSequentialGroup()
+                        .addComponent(previewInvoice3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(saveInvoice3)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel19Layout.createSequentialGroup()
+                        .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel19Layout.createSequentialGroup()
+                                .addComponent(jLabel66)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(invoiceAmount3, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel19Layout.createSequentialGroup()
+                                .addComponent(jLabel65)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(invoicePatientSelect3, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(75, 75, 75))))
+        );
+        jPanel19Layout.setVerticalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel19Layout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addComponent(jLabel64, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(invoicePatientSelect3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel65))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel66)
+                    .addComponent(invoiceAmount3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(previewInvoice3)
+                    .addComponent(saveInvoice3))
+                .addContainerGap(247, Short.MAX_VALUE))
+        );
+
+        jPanel20.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel67.setFont(new java.awt.Font("Ubuntu Sans", 1, 24)); // NOI18N
+        jLabel67.setForeground(new java.awt.Color(33, 37, 41));
+        jLabel67.setText("INVOICE VIEW");
+
+        jLabel68.setFont(new java.awt.Font("Ubuntu Sans", 1, 14)); // NOI18N
+        jLabel68.setForeground(new java.awt.Color(33, 37, 41));
+        jLabel68.setText("PATIENT INFORAMATION");
+
+        jLabel69.setFont(new java.awt.Font("Ubuntu Sans", 1, 14)); // NOI18N
+        jLabel69.setForeground(new java.awt.Color(33, 37, 41));
+        jLabel69.setText("TRANSACTION INFORMATION");
+
+        jPanel21.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel21.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel70.setFont(new java.awt.Font("Ubuntu Sans", 1, 14)); // NOI18N
+        jLabel70.setForeground(new java.awt.Color(33, 37, 41));
+        jLabel70.setText("NAMES");
+
+        jLabel71.setFont(new java.awt.Font("Ubuntu Sans", 1, 14)); // NOI18N
+        jLabel71.setForeground(new java.awt.Color(33, 37, 41));
+        jLabel71.setText("AGE");
+
+        jLabel72.setFont(new java.awt.Font("Ubuntu Sans", 1, 14)); // NOI18N
+        jLabel72.setForeground(new java.awt.Color(33, 37, 41));
+        jLabel72.setText("INSURANCE COMPANY");
+
+        jLabel73.setFont(new java.awt.Font("Ubuntu Sans", 1, 14)); // NOI18N
+        jLabel73.setForeground(new java.awt.Color(33, 37, 41));
+        jLabel73.setText("INSURANCE COVERAGE");
+
+        jLabel74.setFont(new java.awt.Font("Ubuntu Sans", 1, 14)); // NOI18N
+        jLabel74.setForeground(new java.awt.Color(33, 37, 41));
+        jLabel74.setText("AGE DISCOUNT");
+
+        invoiceViewNameLabel.setText(" ");
+        invoiceViewNameLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        invoiceViewAgeLabel.setText(" ");
+        invoiceViewAgeLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        invoiceViewInsuranceCompanyNameLabel.setText(" ");
+        invoiceViewInsuranceCompanyNameLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        invoiceViewInsuranceDicountLabel.setText(" ");
+        invoiceViewInsuranceDicountLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        invoiceViewAgeDicountLabel.setText(" ");
+        invoiceViewAgeDicountLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
+        jPanel21.setLayout(jPanel21Layout);
+        jPanel21Layout.setHorizontalGroup(
+            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel21Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel21Layout.createSequentialGroup()
+                        .addComponent(jLabel72)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(invoiceViewInsuranceCompanyNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel21Layout.createSequentialGroup()
+                        .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel70)
+                            .addComponent(jLabel71))
+                        .addGap(121, 121, 121)
+                        .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(invoiceViewNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(invoiceViewAgeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel21Layout.createSequentialGroup()
+                        .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel73)
+                            .addComponent(jLabel74))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(invoiceViewAgeDicountLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(invoiceViewInsuranceDicountLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel21Layout.setVerticalGroup(
+            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel21Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel70)
+                    .addComponent(invoiceViewNameLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel71)
+                    .addComponent(invoiceViewAgeLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel72)
+                    .addComponent(invoiceViewInsuranceCompanyNameLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel73)
+                    .addComponent(invoiceViewInsuranceDicountLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel74)
+                    .addComponent(invoiceViewAgeDicountLabel))
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
+
+        jPanel22.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel22.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel75.setFont(new java.awt.Font("Ubuntu Sans", 1, 14)); // NOI18N
+        jLabel75.setForeground(new java.awt.Color(33, 37, 41));
+        jLabel75.setText("AMOUNT TO PAY");
+
+        jLabel76.setFont(new java.awt.Font("Ubuntu Sans", 1, 14)); // NOI18N
+        jLabel76.setForeground(new java.awt.Color(33, 37, 41));
+        jLabel76.setText("AGE DISCOUNT AMOUNT");
+
+        jLabel77.setFont(new java.awt.Font("Ubuntu Sans", 1, 14)); // NOI18N
+        jLabel77.setForeground(new java.awt.Color(33, 37, 41));
+        jLabel77.setText("INSURANCE COVERAGE");
+
+        jLabel78.setFont(new java.awt.Font("Ubuntu Sans", 1, 14)); // NOI18N
+        jLabel78.setForeground(new java.awt.Color(33, 37, 41));
+        jLabel78.setText("FINAL AMOUNT TO PAY");
+
+        jLabel79.setFont(new java.awt.Font("Ubuntu Sans", 1, 14)); // NOI18N
+        jLabel79.setForeground(new java.awt.Color(33, 37, 41));
+        jLabel79.setText("PAYMENT STATUS");
+
+        invoiceViewAmountToPay.setText(" ");
+        invoiceViewAmountToPay.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        invoiceViewAgeDiscount.setText(" ");
+        invoiceViewAgeDiscount.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        invoiceViewInsuranceCoverage.setText(" ");
+        invoiceViewInsuranceCoverage.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        invoiceViewFinalAmountToPay.setText(" ");
+        invoiceViewFinalAmountToPay.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        invoiceViewPaymentStatus.setText(" ");
+        invoiceViewPaymentStatus.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout jPanel22Layout = new javax.swing.GroupLayout(jPanel22);
+        jPanel22.setLayout(jPanel22Layout);
+        jPanel22Layout.setHorizontalGroup(
+            jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel22Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel22Layout.createSequentialGroup()
+                        .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel22Layout.createSequentialGroup()
+                                .addComponent(jLabel76)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(invoiceViewAgeDiscount, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel22Layout.createSequentialGroup()
+                                .addComponent(jLabel77)
+                                .addGap(18, 18, 18)
+                                .addComponent(invoiceViewInsuranceCoverage, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel22Layout.createSequentialGroup()
+                                    .addComponent(jLabel79)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(invoiceViewPaymentStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel22Layout.createSequentialGroup()
+                                    .addComponent(jLabel78)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(invoiceViewFinalAmountToPay, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addContainerGap(22, Short.MAX_VALUE))
+                    .addGroup(jPanel22Layout.createSequentialGroup()
+                        .addComponent(jLabel75)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(invoiceViewAmountToPay, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(21, 21, 21))))
+        );
+        jPanel22Layout.setVerticalGroup(
+            jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel22Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel75)
+                    .addComponent(invoiceViewAmountToPay))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel76)
+                    .addComponent(invoiceViewAgeDiscount))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel77)
+                    .addComponent(invoiceViewInsuranceCoverage))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel78)
+                    .addComponent(invoiceViewFinalAmountToPay))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel79)
+                    .addComponent(invoiceViewPaymentStatus))
+                .addContainerGap(15, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
+        jPanel20.setLayout(jPanel20Layout);
+        jPanel20Layout.setHorizontalGroup(
+            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel20Layout.createSequentialGroup()
+                .addGap(48, 48, 48)
+                .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel69)
+                    .addComponent(jLabel68)
+                    .addComponent(jPanel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel20Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel67)
+                .addGap(132, 132, 132))
+        );
+        jPanel20Layout.setVerticalGroup(
+            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel20Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jLabel67, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel68, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel69, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(136, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
+        jPanel18.setLayout(jPanel18Layout);
+        jPanel18Layout.setHorizontalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel18Layout.createSequentialGroup()
+                .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 177, Short.MAX_VALUE))
+        );
+        jPanel18Layout.setVerticalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel18Layout.createSequentialGroup()
+                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 275, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
+        jPanel13.setLayout(jPanel13Layout);
+        jPanel13Layout.setHorizontalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 177, Short.MAX_VALUE))
+            .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel13Layout.createSequentialGroup()
+                    .addGap(0, 24, Short.MAX_VALUE)
+                    .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 24, Short.MAX_VALUE)))
+        );
+        jPanel13Layout.setVerticalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 272, Short.MAX_VALUE))
+            .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel13Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
+        tabsPane.addTab("INVOICES", jPanel13);
 
         jLabel7.setFont(new java.awt.Font("Ubuntu Sans", 1, 36)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 193, 7));
@@ -576,14 +1726,10 @@ public class App extends javax.swing.JFrame {
         containerLayout.setHorizontalGroup(
             containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(containerLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tabsPane)
-                    .addGroup(containerLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel7)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel7)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(tabsPane, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         containerLayout.setVerticalGroup(
             containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -634,8 +1780,8 @@ public class App extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Age and Consultation Fee must be numbers!");
             return;
         }
-
-        Patient p = new Patient(null, fullName, age, gender, diagnosis, fee, LocalDate.now());
+        double discountedFee = applyDiscount(age, fee);
+        Patient p = new Patient(null, fullName, age, gender, diagnosis, discountedFee, LocalDate.now());
         String generatedId = patientDao.addPatient(p);
         if (generatedId != null) {
             // insert insurance if a company and policy number are provided
@@ -708,8 +1854,11 @@ public class App extends javax.swing.JFrame {
         try {
             int row = patientsTable.getSelectedRow();
             LocalDate regDate = LocalDate.parse(patientsTable.getValueAt(row, 6).toString());
-            Patient p = new Patient(selectedPatientId, fullName, Integer.parseInt(ageStr),
-                gender, diagnosis, Double.parseDouble(feeStr), regDate);
+            int age = Integer.parseInt(ageStr);
+            double fee = Double.parseDouble(feeStr);
+            double discountedFee = applyDiscount(age, fee);
+            Patient p = new Patient(selectedPatientId, fullName, age,
+                gender, diagnosis, discountedFee, regDate);
             if (patientDao.updateClient(p) > 0) {
                 JOptionPane.showMessageDialog(this, "Patient updated successfully!");
                 refreshPatientsTable();
@@ -742,6 +1891,12 @@ public class App extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_deletePatientButtonActionPerformed
 
+    private double applyDiscount(int age, double fee) {
+        if (age < 12) return fee * 0.50;
+        if (age > 60) return fee * 0.70;
+        return fee;
+    }
+
     private void deleteCompanyBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteCompanyBtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_deleteCompanyBtnActionPerformed
@@ -761,6 +1916,46 @@ public class App extends javax.swing.JFrame {
     private void insuranceInvalidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insuranceInvalidActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_insuranceInvalidActionPerformed
+
+    private void saveCompanyBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveCompanyBtn2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_saveCompanyBtn2ActionPerformed
+
+    private void updateCompanyBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateCompanyBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_updateCompanyBtnActionPerformed
+
+    private void invoicePatientSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_invoicePatientSelectActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_invoicePatientSelectActionPerformed
+
+    private void invoiceAmountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_invoiceAmountActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_invoiceAmountActionPerformed
+
+    private void previewInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previewInvoiceActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_previewInvoiceActionPerformed
+
+    private void saveInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveInvoiceActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_saveInvoiceActionPerformed
+
+    private void invoicePatientSelect3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_invoicePatientSelect3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_invoicePatientSelect3ActionPerformed
+
+    private void invoiceAmount3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_invoiceAmount3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_invoiceAmount3ActionPerformed
+
+    private void previewInvoice3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previewInvoice3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_previewInvoice3ActionPerformed
+
+    private void saveInvoice3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveInvoice3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_saveInvoice3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -813,6 +2008,41 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> genderTxt;
     private javax.swing.JCheckBox insuranceInvalid;
     private javax.swing.JCheckBox insuranceValid;
+    private javax.swing.JTextField invoiceAmount;
+    private javax.swing.JTextField invoiceAmount3;
+    private javax.swing.JComboBox<String> invoicePatientSelect;
+    private javax.swing.JComboBox<String> invoicePatientSelect3;
+    private javax.swing.JLabel invoicePreviewAgeDicountLabel;
+    private javax.swing.JLabel invoicePreviewAgeDicountLabel2;
+    private javax.swing.JLabel invoicePreviewAgeDiscount;
+    private javax.swing.JLabel invoicePreviewAgeDiscount2;
+    private javax.swing.JLabel invoicePreviewAgeLabel;
+    private javax.swing.JLabel invoicePreviewAgeLabel2;
+    private javax.swing.JLabel invoicePreviewAmountToPay;
+    private javax.swing.JLabel invoicePreviewAmountToPay2;
+    private javax.swing.JLabel invoicePreviewFinalAmountToPay;
+    private javax.swing.JLabel invoicePreviewFinalAmountToPay2;
+    private javax.swing.JLabel invoicePreviewInsuranceCompanyNameLabel;
+    private javax.swing.JLabel invoicePreviewInsuranceCompanyNameLabel2;
+    private javax.swing.JLabel invoicePreviewInsuranceCoverage;
+    private javax.swing.JLabel invoicePreviewInsuranceCoverage2;
+    private javax.swing.JLabel invoicePreviewInsuranceDicountLabel;
+    private javax.swing.JLabel invoicePreviewInsuranceDicountLabel2;
+    private javax.swing.JLabel invoicePreviewNameLabel;
+    private javax.swing.JLabel invoicePreviewNameLabel2;
+    private javax.swing.JLabel invoicePreviewPaymentStatus;
+    private javax.swing.JLabel invoicePreviewPaymentStatus2;
+    private javax.swing.JLabel invoiceViewAgeDicountLabel;
+    private javax.swing.JLabel invoiceViewAgeDiscount;
+    private javax.swing.JLabel invoiceViewAgeLabel;
+    private javax.swing.JLabel invoiceViewAmountToPay;
+    private javax.swing.JLabel invoiceViewFinalAmountToPay;
+    private javax.swing.JLabel invoiceViewInsuranceCompanyNameLabel;
+    private javax.swing.JLabel invoiceViewInsuranceCoverage;
+    private javax.swing.JLabel invoiceViewInsuranceDicountLabel;
+    private javax.swing.JLabel invoiceViewNameLabel;
+    private javax.swing.JLabel invoiceViewPaymentStatus;
+    private javax.swing.JTable invoicesTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -820,25 +2050,92 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel48;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel51;
+    private javax.swing.JLabel jLabel52;
+    private javax.swing.JLabel jLabel53;
+    private javax.swing.JLabel jLabel54;
+    private javax.swing.JLabel jLabel55;
+    private javax.swing.JLabel jLabel56;
+    private javax.swing.JLabel jLabel57;
+    private javax.swing.JLabel jLabel58;
+    private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel60;
+    private javax.swing.JLabel jLabel61;
+    private javax.swing.JLabel jLabel62;
+    private javax.swing.JLabel jLabel63;
+    private javax.swing.JLabel jLabel64;
+    private javax.swing.JLabel jLabel65;
+    private javax.swing.JLabel jLabel66;
+    private javax.swing.JLabel jLabel67;
+    private javax.swing.JLabel jLabel68;
+    private javax.swing.JLabel jLabel69;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel70;
+    private javax.swing.JLabel jLabel71;
+    private javax.swing.JLabel jLabel72;
+    private javax.swing.JLabel jLabel73;
+    private javax.swing.JLabel jLabel74;
+    private javax.swing.JLabel jLabel75;
+    private javax.swing.JLabel jLabel76;
+    private javax.swing.JLabel jLabel77;
+    private javax.swing.JLabel jLabel78;
+    private javax.swing.JLabel jLabel79;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel15;
+    private javax.swing.JPanel jPanel16;
+    private javax.swing.JPanel jPanel17;
+    private javax.swing.JPanel jPanel18;
+    private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel20;
+    private javax.swing.JPanel jPanel21;
+    private javax.swing.JPanel jPanel22;
+    private javax.swing.JPanel jPanel23;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JSplitPane jSplitPane2;
     private javax.swing.JComboBox<String> patientInsuranceCompany;
     private javax.swing.JTable patientsTable;
     private javax.swing.JTextField phoneCompanyTxt;
     private javax.swing.JTextField policyNumber;
+    private javax.swing.JButton previewInvoice;
+    private javax.swing.JButton previewInvoice3;
     private javax.swing.JButton saveCompanyBtn2;
+    private javax.swing.JButton saveInvoice;
+    private javax.swing.JButton saveInvoice3;
     private javax.swing.JTabbedPane tabsPane;
     private javax.swing.JButton updateCompanyBtn;
     private javax.swing.JButton updatePatientButton;

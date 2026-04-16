@@ -9,7 +9,7 @@ CREATE DATABASE "PMIS_db";
 
 -- ------------------------------------------------------------
 -- 1. patient  (patientID auto-generated as PAT-0001, PAT-0002 …)
--- ------------------------------------------------------------
+-- ------------------------------------------------------------TESTINTRETE
 CREATE SEQUENCE patient_seq START 1;
 
 CREATE TABLE patient (

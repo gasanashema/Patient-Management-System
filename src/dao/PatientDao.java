@@ -178,13 +178,16 @@ public class PatientDao {
             PreparedStatement pst = con.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
+                int age = rs.getInt("age");
+                double fee = rs.getDouble("consultationFee");
+                double originalFee = reverseDiscount(age, fee);
                 rows.add(new Object[]{
                     rs.getString("patientID"),
                     rs.getString("fullName"),
-                    rs.getInt("age"),
+                    age,
                     rs.getString("gender"),
                     rs.getString("diagnosis"),
-                    rs.getDouble("consultationFee"),
+                    String.format("%.2f", originalFee) + " → " + String.format("%.2f", fee),
                     rs.getDate("registrationDate") != null ? rs.getDate("registrationDate").toLocalDate().toString() : "",
                     rs.getString("companyName") != null ? rs.getString("companyName") : "None",
                     rs.getString("policyNumber") != null ? rs.getString("policyNumber") : "-",
@@ -196,5 +199,12 @@ public class PatientDao {
             ex.printStackTrace();
         }
         return rows;
+    }
+
+    // reverse the discount to recover the original fee for display
+    private double reverseDiscount(int age, double discountedFee) {
+        if (age < 12)  return discountedFee / 0.50;
+        if (age > 60)  return discountedFee / 0.70;
+        return discountedFee;
     }
 }
