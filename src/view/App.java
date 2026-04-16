@@ -208,6 +208,8 @@ public class App extends javax.swing.JFrame {
         invoiceAmount = new javax.swing.JTextField();
         previewInvoice = new javax.swing.JButton();
         saveInvoice = new javax.swing.JButton();
+        jLabel32 = new javax.swing.JLabel();
+        invoicePaymentStatusSelect = new javax.swing.JComboBox<>();
         jPanel5 = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
@@ -675,7 +677,7 @@ public class App extends javax.swing.JFrame {
                     .addComponent(updateCompanyBtn)
                     .addComponent(deleteCompanyBtn)
                     .addComponent(saveCompanyBtn2))
-                .addContainerGap(537, Short.MAX_VALUE))
+                .addContainerGap(579, Short.MAX_VALUE))
         );
 
         jSplitPane2.setRightComponent(jPanel2);
@@ -732,6 +734,20 @@ public class App extends javax.swing.JFrame {
             }
         });
 
+        jLabel32.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel32.setFont(new java.awt.Font("Ubuntu Sans", 1, 18)); // NOI18N
+        jLabel32.setForeground(new java.awt.Color(255, 193, 7));
+        jLabel32.setText("STATUS");
+
+        invoicePaymentStatusSelect.setBackground(new java.awt.Color(255, 255, 255));
+        invoicePaymentStatusSelect.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PENDING", "PAID" }));
+        invoicePaymentStatusSelect.setToolTipText("");
+        invoicePaymentStatusSelect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                invoicePaymentStatusSelectActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -748,13 +764,17 @@ public class App extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(saveInvoice)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel32)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(invoicePaymentStatusSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
                                 .addComponent(jLabel18)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(invoiceAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
                                 .addComponent(jLabel17)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(invoicePatientSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -773,7 +793,11 @@ public class App extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel18)
                     .addComponent(invoiceAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel32)
+                    .addComponent(invoicePaymentStatusSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(previewInvoice)
                     .addComponent(saveInvoice))
@@ -818,19 +842,19 @@ public class App extends javax.swing.JFrame {
         jLabel26.setText("AGE DISCOUNT");
 
         invoicePreviewNameLabel.setText(" ");
-        invoicePreviewNameLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        invoicePreviewNameLabel.setBorder(null);
 
         invoicePreviewAgeLabel.setText(" ");
-        invoicePreviewAgeLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        invoicePreviewAgeLabel.setBorder(null);
 
         invoicePreviewInsuranceCompanyNameLabel.setText(" ");
-        invoicePreviewInsuranceCompanyNameLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        invoicePreviewInsuranceCompanyNameLabel.setBorder(null);
 
         invoicePreviewInsuranceDicountLabel.setText(" ");
-        invoicePreviewInsuranceDicountLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        invoicePreviewInsuranceDicountLabel.setBorder(null);
 
         invoicePreviewAgeDicountLabel.setText(" ");
-        invoicePreviewAgeDicountLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        invoicePreviewAgeDicountLabel.setBorder(null);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -1014,7 +1038,7 @@ public class App extends javax.swing.JFrame {
                 .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(139, Short.MAX_VALUE))
+                .addContainerGap(186, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -1100,7 +1124,7 @@ public class App extends javax.swing.JFrame {
 
         jLabel51.setFont(new java.awt.Font("Ubuntu Sans", 1, 24)); // NOI18N
         jLabel51.setForeground(new java.awt.Color(33, 37, 41));
-        jLabel51.setText("INVOICE PREVIEW");
+        jLabel51.setText("INVOICE VIEW");
 
         jLabel52.setFont(new java.awt.Font("Ubuntu Sans", 1, 14)); // NOI18N
         jLabel52.setForeground(new java.awt.Color(33, 37, 41));
@@ -1341,7 +1365,7 @@ public class App extends javax.swing.JFrame {
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 177, Short.MAX_VALUE))
+                .addGap(0, 222, Short.MAX_VALUE))
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1349,7 +1373,7 @@ public class App extends javax.swing.JFrame {
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 272, Short.MAX_VALUE))
+                .addGap(0, 314, Short.MAX_VALUE))
         );
 
         tabsPane.addTab("INVOICES", jPanel13);
@@ -1664,6 +1688,8 @@ public class App extends javax.swing.JFrame {
         double insuranceCoverageAmt = afterAgeDiscount * coveragePct / 100;
         double finalAmount         = afterAgeDiscount - insuranceCoverageAmt;
 
+        String paymentStatus = (String) invoicePaymentStatusSelect.getSelectedItem();
+
         // populate preview labels
         invoicePreviewNameLabel.setText(fullName);
         invoicePreviewAgeLabel.setText(String.valueOf(age));
@@ -1674,7 +1700,7 @@ public class App extends javax.swing.JFrame {
         invoicePreviewAgeDiscount.setText(String.format("%.2f", ageDiscountAmt));
         invoicePreviewInsuranceCoverage.setText(String.format("%.2f", insuranceCoverageAmt));
         invoicePreviewFinalAmountToPay.setText(String.format("%.2f", finalAmount));
-        invoicePreviewPaymentStatus.setText("PENDING");
+        invoicePreviewPaymentStatus.setText(paymentStatus);
 
         // build receipt object ready for saving
         currentReceipt = new Receipt();
@@ -1686,7 +1712,7 @@ public class App extends javax.swing.JFrame {
         currentReceipt.setInsuranceCoveragePercent(coveragePct);
         currentReceipt.setInsuranceCoverageAmount(insuranceCoverageAmt);
         currentReceipt.setFinalAmountPaid(finalAmount);
-        currentReceipt.setPaymentStatus("PENDING");
+        currentReceipt.setPaymentStatus(paymentStatus);
     }//GEN-LAST:event_previewInvoiceActionPerformed
 
     private void saveInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveInvoiceActionPerformed
@@ -1703,6 +1729,10 @@ public class App extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Failed to save invoice.");
         }
     }//GEN-LAST:event_saveInvoiceActionPerformed
+
+    private void invoicePaymentStatusSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_invoicePaymentStatusSelectActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_invoicePaymentStatusSelectActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1757,6 +1787,7 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JCheckBox insuranceValid;
     private javax.swing.JTextField invoiceAmount;
     private javax.swing.JComboBox<String> invoicePatientSelect;
+    private javax.swing.JComboBox<String> invoicePaymentStatusSelect;
     private javax.swing.JLabel invoicePreviewAgeDicountLabel;
     private javax.swing.JLabel invoicePreviewAgeDiscount;
     private javax.swing.JLabel invoicePreviewAgeLabel;
@@ -1803,6 +1834,7 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel48;
     private javax.swing.JLabel jLabel5;
